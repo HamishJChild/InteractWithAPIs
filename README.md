@@ -5,8 +5,9 @@ To produce a program which, when given the name of an artist, will produce the a
 This will use an API that will need to use the name of an artist/artists given by a user (after checking this name with another API request) to find the mean number of words in their songs. I will need to investigate what API calls I can make in order to work out how to find the mean number of words in their songs.
 
 Structure of getting mean number of songs:
-- First use API call to get the artist (or return error if artist doesn't exist).
-- Then get songs for that artistand pass the songs to a method that uses another API call to get the lyrics, and count the number of words in the song.
+- First use API call to get the artist (or return error if artist doesn't exist). This should get the Artist ID.
+- Then get songs for that artist using the Artist ID. This will require adding the Song name to a list and paging through the genius results (incrementing the `page` param until `next_page` returns `NULL`.
+- Pass the songs to a method that uses another API (Mourits Lyrics) call to get the lyrics, and count the number of words in the song.
 - Add this to a list and find the avergae of all # of lyrics.
 
 To Do:
