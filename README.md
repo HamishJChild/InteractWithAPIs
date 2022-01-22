@@ -11,3 +11,4 @@ Next steps:
 - Look at extending the CLI with adding multiple Artists.
 - Turn main.py into a series of methods, and then a Main class with a __run__ method.
 - Tests
+- Potentially set up Coverage?
