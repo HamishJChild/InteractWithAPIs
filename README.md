@@ -7,6 +7,7 @@ This will use an API that will need to use the name of an artist/artists given b
 First pass of functionality is complete and working.
 Next steps:
 - Create Artist class and move to OOP approach.
+- Speed up API (perhaps with `requests.Session`)
 - Look at extending the CLI with adding multiple Artists.
 - Turn main.py into a series of methods, and then a Main class with a __run__ method.
 - Tests
