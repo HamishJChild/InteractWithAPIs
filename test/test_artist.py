@@ -1,12 +1,19 @@
 from unittest import TestCase
 import lorem
 import artist
-import song
+import re
+import io
+import sys
+from colorama import init
+from termcolor import colored
+
+# use Colorama to make Termcolor work on Windows too. Initialise colorama below.
+init()
 
 
 class ArtistTests(TestCase):
     """
-    A set of tests for the Artist class and its methods.
+    A set of test for the Artist class and its methods.
     """
 
     def setUp(self) -> None:
@@ -43,6 +50,9 @@ class ArtistTests(TestCase):
         Test that the calculated word count for a list of songs is correct.
         This is for a list of songs with lyrics
         """
+        # capture the console output to prevent it from printing
+        captured_output = io.StringIO()  # Create StringIO object
+        sys.stdout = captured_output
         word_count_list = []
         # First assign the songs to the artist attr Songs
         self.new_artist.assign_songs(self.songs_no_lyrics)
@@ -52,6 +62,32 @@ class ArtistTests(TestCase):
             word_count_list.append(len(song_obj.lyrics.split()))
         # now run function to calc mean wordcount
         self.new_artist.calc_mean_wordcount()
+        # reset redirect
+        sys.stdout = sys.__stdout__
         # calc mean word count
         mean_word_count = int((sum(word_count_list)/len(word_count_list)))
         self.assertEqual(self.new_artist.mean_wordcount, mean_word_count)
+        # assert the console output is correct
+        output_pred = f'The average word count for {self.new_artist.full_name} is {mean_word_count}.'
+        # Console output contains ascii escape codes, so assert predicted is 'in' actual
+        self.assertIn(output_pred, captured_output.getvalue())
+
+    def test_calc_mean_wordcount_no_lyrics(self):
+        """
+        Test that for a list of songs with no lyrics, the mean wordcount is 0
+        and the expected console output is returned
+        """
+        # capture the console output to prevent it from printing
+        captured_output = io.StringIO()  # Create StringIO object
+        sys.stdout = captured_output
+        word_count_list = []
+        # First assign the songs to the artist attr Songs
+        self.new_artist.assign_songs(self.songs_no_lyrics)
+        # now run function to calc mean wordcount - this should do nothing as there are no lyrics
+        self.new_artist.calc_mean_wordcount()
+        # reset redirect
+        sys.stdout = sys.__stdout__
+        # assert the console output is correct
+        output_pred = f'No lyrics found for {self.new_artist.full_name}.'
+        # Console output contains ascii escape codes, so assert predicted is 'in' actual
+        self.assertIn(output_pred, captured_output.getvalue())
