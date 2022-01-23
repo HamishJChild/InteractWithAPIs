@@ -76,6 +76,7 @@ class Artist(object):
         """
         # for all songs in the list that have lyrics_found set to True, find the mean word_count
         found_word_counts = [found_song.word_count for found_song in self.songs if found_song.lyrics_found]
+        print(found_word_counts)
         # Only calculate the mean if lyrics have been found for the songs in the list.
         if len(found_word_counts) > 0:
             mean = int(np.mean(found_word_counts))

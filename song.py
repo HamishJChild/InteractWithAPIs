@@ -32,7 +32,7 @@ class Song:
 
     """
 
-    def __init__(self, title) -> None:
+    def __init__(self, title, lyrics=None, lyrics_found=False, word_count=0) -> None:
         """
         Constructs all the necessary attributes for the song object.
 

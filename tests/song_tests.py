@@ -5,7 +5,7 @@ import song
 
 class SongTests(TestCase):
     """
-    A set of tests for the Song class and its methods
+    A set of tests1 for the Song class and its methods.
     """
 
     def setUp(self) -> None:
