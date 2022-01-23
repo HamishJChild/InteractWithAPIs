@@ -1,12 +1,8 @@
 import requests
-from colorama import init
-from termcolor import colored
-
-# use Colorama to make Termcolor work on Windows too. Initialise colorama below.
-init()
+import artist
 
 
-def make_request(url, params=None, headers=None):
+def make_request(url: str, params=None, headers=None):
     """
     Function to make a request to an API using the base URL and other params/headers.
     Returns a response if no HTTPError is returned, otherwise it passes the iteration.
@@ -24,11 +20,10 @@ def make_request(url, params=None, headers=None):
         pass
 
 
-def find_artist_genius(entered_name) -> tuple:
+def find_artist_genius(entered_name: str) -> artist.Artist:
     """A function to use an API call to Genius find the artist from the search entry.
     :param entered_name: a string entered by the user in the cli input.
-    :returns artist_id: a string that represents the unique artist ID in the Genius database.
-    :returns artist_name: a string; the name of the artist found in the Genius database."""
+    :returns artist_obj: an Artist object with the full_name and genius_id variables set."""
 
     # first search for the artist on Genius API
     base_url = "https://genius.p.rapidapi.com/search"
@@ -46,26 +41,27 @@ def find_artist_genius(entered_name) -> tuple:
     try:
         artist_id = json_data['response']['hits'][0]['result']['primary_artist']['id']
         artist_name = json_data['response']['hits'][0]['result']['primary_artist']['name']
-        return artist_id, artist_name
+        artist_obj = artist.Artist(genius_id=artist_id, full_name=artist_name)
+        return artist_obj
     except IndexError:
         print('This artist does not exist in the Genius database')
         raise SystemExit()
 
 
-def find_artist_songs_genius(artist_id) -> list:
-    """A function to use an API call to Genius to find and return all songs for an artist
-    :param artist_id: a string that represents the unique artist ID in the Genius database.
-    :returns artists_songs: a list of all the songs for the given artist"""
+def find_artist_songs_genius(artist_obj: artist.Artist) -> None:
+    """A function to use an API call to Genius to find all songs for an artist,
+     create Song objects for them and assign to the Artist object.
+    :param artist_obj: an artist object
+    :returns None"""
 
     # instantiate initial variables
     page_number = 1
-    artists_songs = []
 
     # the final page has a value of 'Null' for the next_page variable,
     # so loop over while page_number is of type int
     while type(page_number) == int:
         # get the songs from the artist ID
-        url = f"https://genius.p.rapidapi.com/artists/{artist_id}/songs?"
+        url = f"https://genius.p.rapidapi.com/artists/{artist_obj.genius_id}/songs?"
         querystring = {"page": page_number,
                        "per_page": "50"}
         headers = {
@@ -75,39 +71,30 @@ def find_artist_songs_genius(artist_id) -> list:
 
         genius_songs_response = make_request(url, headers=headers, params=querystring)
         songs = genius_songs_response.json()['response']['songs']
-        # use list comprehension to get a list of all artists songs
-        artists_songs.extend([song['title'] for song in songs])
+        artist_obj.assign_songs(songs)
         # redefine the page variable
         page_number = genius_songs_response.json()['response']['next_page']
 
-    return artists_songs
 
-
-def find_lyrics_word_count(artists_songs, artist_name) -> int:
+def find_lyrics_for_songs(artist_obj: artist.Artist) -> None:
     """A function to find the lyrics for the each song in the list
      using the lyrics.ovh API
 
-     :param artists_songs: a list of the songs found for an artist
-     :param artist_name: a string of the artists name
+     :param artist_obj : an Artist object
      :returns avg_word_count: an integer representing the average lyrics word count
      for the artists_songs list"""
 
     # instantiate the word count list
     word_count_list = []
-    for song_name in artists_songs:
+    for song_obj in artist_obj.songs:
         # Get the lyrics for the song on the lyrics.ovh API
-        url = f"https://api.lyrics.ovh/v1/{artist_name}/{song_name}"
+        url = f"https://api.lyrics.ovh/v1/{artist_obj.full_name}/{song_obj.title}"
 
         lyrics_response = make_request(url)
         if lyrics_response:
             lyrics = lyrics_response.json()['lyrics']
 
-            # now get count of words in lyrics
-            word_count = len(lyrics.split())
-            word_count_list.append(word_count)
-    if len(word_count_list) > 0:
-        avg_word_count = int(sum(word_count_list)/len(word_count_list))
-    else:
-        print(colored(text=f'No lyrics found for {artist_name}.', color='red', attrs=['bold', 'reverse']))
-        avg_word_count = None
-    return avg_word_count
+            # now assign the lyrics to the song_obj
+            song_obj.assign_lyrics_and_wordcount(lyrics)
+    # now cal and assign the artist mean wordcount
+    artist_obj.calc_mean_wordcount()
