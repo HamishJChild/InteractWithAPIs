@@ -1,3 +1,13 @@
+"""This module contains the artist class and its methods.
+
+Classes:
+Artist
+
+Functions:
+assign_songs
+calc_mean_wordcount
+
+"""
 import song
 import numpy as np
 from colorama import init
@@ -5,17 +15,6 @@ from termcolor import colored
 
 # use Colorama to make Termcolor work on Windows too. Initialise colorama below.
 init()
-
-"""This module contains the artist class and its methods.
-
-Classes:
-Artist
-
-
-Functions:
-
-
-"""
 
 
 class Artist(object):
@@ -37,6 +36,8 @@ class Artist(object):
 
     Methods
     -------
+    assign_songs
+    calc_mean_wordcount
 
     """
 

@@ -2,3 +2,5 @@ requests
 termcolor
 colorama
 numpy
+coverage
+lorem

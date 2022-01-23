@@ -5,7 +5,7 @@ Song
 
 
 Functions:
-
+assign_lyrics_and_wordcount
 
 """
 

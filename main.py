@@ -20,12 +20,12 @@ class Main:
         :return: None
         """
         print(colored(text='Artist Word Count CLI by Hamish Child', color='red', attrs=['bold', 'reverse']))
-        sleep(2)
+        sleep(1)
         # take the input from the user
         print(u'Hi and welcome to the Artist Avg Word Count CLI!\n'
               u'\n'
               u'Find the average word count for any artist with ease.\n')
-        sleep(2)
+        sleep(1)
         print('Please enter an Artist name:')
         self.entered_name = input()
 
@@ -74,7 +74,7 @@ class Main:
         song_time_taken = round((song_end_time - song_start_time), 2)
 
         # collecting lyrics take approximately 30 times as long as it takes to collect the songs
-        lyric_approx_time = datetime.timedelta(seconds=(song_time_taken*30))
+        lyric_approx_time = datetime.timedelta(seconds=int(song_time_taken*30))
         print(f'Collection Lyrics will take approx {lyric_approx_time}')
         lyric_start_time = time.time()
         print('Collecting lyrics...\n')
