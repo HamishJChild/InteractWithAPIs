@@ -48,11 +48,10 @@ class ArtistTests(TestCase):
         self.new_artist.assign_songs(self.songs_no_lyrics)
         # For each song, assign lyrics and set lyrics_found=True, and record the word count of the lyrics
         for song_obj in self.new_artist.songs:
-            song_obj.lyrics_found = True
-            song_obj.lyrics = lorem.paragraph()
+            song_obj.assign_lyrics_and_wordcount(lorem.paragraph())
             word_count_list.append(len(song_obj.lyrics.split()))
         # now run function to calc mean wordcount
         self.new_artist.calc_mean_wordcount()
         # calc mean word count
-        mean_word_count = (sum(word_count_list)/len(word_count_list))
+        mean_word_count = int((sum(word_count_list)/len(word_count_list)))
         self.assertEqual(self.new_artist.mean_wordcount, mean_word_count)
