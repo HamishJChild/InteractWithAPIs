@@ -1,4 +1,9 @@
 import requests
+from colorama import init
+from termcolor import colored
+
+# use Colorama to make Termcolor work on Windows too. Initialise colorama below.
+init()
 
 
 def make_request(url, params=None, headers=None):
@@ -100,6 +105,9 @@ def find_lyrics_word_count(artists_songs, artist_name) -> int:
             # now get count of words in lyrics
             word_count = len(lyrics.split())
             word_count_list.append(word_count)
-
-    avg_word_count = int(sum(word_count_list)/len(word_count_list))
+    if len(word_count_list) > 0:
+        avg_word_count = int(sum(word_count_list)/len(word_count_list))
+    else:
+        print(colored(text=f'No lyrics found for {artist_name}.', color='red', attrs=['bold', 'reverse']))
+        avg_word_count = None
     return avg_word_count
