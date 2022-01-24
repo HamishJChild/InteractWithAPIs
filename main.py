@@ -19,13 +19,13 @@ class Main:
         A function to set up the initial display and take the entered name from input.
         :return: None
         """
-        print(colored(text='Artist Word Count CLI by Hamish Child', color='red', attrs=['bold', 'reverse']))
-        sleep(1)
+        print(colored(text='Artist Word Count CLI by Hamish Child\n', color='red', attrs=['bold', 'reverse']))
+        sleep(0.5)
         # take the input from the user
         print(u'Hi and welcome to the Artist Avg Word Count CLI!\n'
               u'\n'
               u'Find the average word count for any artist with ease.\n')
-        sleep(1)
+        sleep(0.5)
         print('Please enter an Artist name:')
         self.entered_name = input()
 
@@ -82,8 +82,6 @@ class Main:
         lyric_end_time = time.time()
 
         lyric_time_taken = round((lyric_end_time-lyric_start_time), 2)
-        print(f'lyrics took {lyric_time_taken}')
-        print(f'ratio of time 1:{lyric_time_taken/song_time_taken}')
         return lyric_time_taken + song_time_taken
 
     def run(self) -> None:
@@ -91,7 +89,7 @@ class Main:
         artist_obj = self.artist_selection()
         if artist_obj:
             time_taken = self.get_songs_and_lyrics(artist_obj)
-            print(f'Thanks for using my CLI application, it took {time_taken}'
+            print(f'Thanks for using my CLI application, it took {datetime.timedelta(seconds=int(time_taken))}'
                   f' seconds to process your request.')
 
 
