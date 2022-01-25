@@ -13,6 +13,7 @@ init()
 class Main:
     def __init__(self):
         self.entered_name = None
+        self.test_var = False
 
     def initial_input(self) -> None:
         """
@@ -41,11 +42,14 @@ class Main:
 
         print(f'You have chosen {artist_obj.full_name}, is this correct? ' +
               colored(text='(Y/N)', color='red', attrs=['bold', 'reverse']))
-        # set up a while loop to only break once the user enters Y or N
+        # set up a while loop to only break once the user enters Y or N,
         while True:
             correct_input = input()
             if correct_input not in ['Y', 'N', 'y', 'n']:
                 print('Please enter Y or N')
+                # if a test is running, break the loop to stop a infinite loop.
+                if self.test_var:
+                    break
                 continue
             else:
                 break

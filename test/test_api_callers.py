@@ -35,7 +35,6 @@ class APIMethodsTests(TestCase):
                        lorem.paragraph(),
                        lorem.paragraph()]
 
-
     @httpretty.activate
     def test_make_request_ok_status_code(self):
         """
