@@ -84,16 +84,13 @@ def find_lyrics_for_songs(artist_obj: artist.Artist) -> None:
      :returns avg_word_count: an integer representing the average lyrics word count
      for the artists_songs list"""
 
-    # instantiate the word count list
-    word_count_list = []
+    # Loop over the songs in the songs attr for an artist
     for song_obj in artist_obj.songs:
         # Get the lyrics for the song on the lyrics.ovh API
         url = f"https://api.lyrics.ovh/v1/{artist_obj.full_name}/{song_obj.title}"
-
         lyrics_response = make_request(url)
         if lyrics_response:
             lyrics = lyrics_response.json()['lyrics']
-
             # now assign the lyrics to the song_obj
             song_obj.assign_lyrics_and_wordcount(lyrics)
     # now cal and assign the artist mean wordcount

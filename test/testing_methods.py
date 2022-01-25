@@ -15,5 +15,5 @@ def construct_url(url, params) -> str:
     """
     # loop over the parms, and append them to the url
     for param in params:
-        url = url + '?' + param + '=' + params.get(param)
+        url = url + '?' + param + '=' + str(params.get(param))
     return url
