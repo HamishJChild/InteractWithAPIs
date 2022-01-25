@@ -10,10 +10,10 @@ def make_request(url: str, params=None, headers=None):
     :param params: a dict with the queries for the API call
     :param headers: a dict of the headers for the API call
     :return: response
-    :raise LookUpError
     """
     try:
         response = requests.request("GET", url, headers=headers, params=params)
+        # print("Make Request Response", response, response.json())
         response.raise_for_status()
         return response
     except requests.exceptions.HTTPError:

@@ -1,14 +1,8 @@
 from unittest import TestCase
 import lorem
 import artist
-import re
 import io
 import sys
-from colorama import init
-from termcolor import colored
-
-# use Colorama to make Termcolor work on Windows too. Initialise colorama below.
-init()
 
 
 class ArtistTests(TestCase):
@@ -30,7 +24,6 @@ class ArtistTests(TestCase):
                                 {'title': 'Song 5'}]
         self.songs_no_lyrics_expected = ['Song 1', 'Song 2', 'Song 3',
                                          'Song 4', 'Song 5']
-        # set up the lyrics for the 5 songs
 
     def test_assign_songs(self):
         """
