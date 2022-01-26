@@ -47,11 +47,9 @@ class Main:
             correct_input = input()
             if correct_input not in ['Y', 'N', 'y', 'n']:
                 print('Please enter Y or N')
-                # if a test is running, break the loop to stop a infinite loop.
-                if self.test_var:
-                    break
                 continue
             else:
+                print('Thank you.')
                 break
         validated_artist = artist_obj
         if correct_input in ['N', 'n']:
@@ -64,8 +62,9 @@ class Main:
         """
         A function to get the songs for an artist, and the lyrics for all those songs.
         Function in here also calculate the avg word count for an artist
+        The time the function might take (lyrics take 30 times longs on avg that songs) is also given.
         :param artist_obj: the artist object
-        :return: time_taken: float the time taken for the songs and lyrics process to take
+        :return: lyric_time_taken + song_time_taken: float the time taken for the songs and lyrics process to take
         """
         song_start_time = time.time()
         print(f'Finding songs for {artist_obj.full_name}')
@@ -79,12 +78,13 @@ class Main:
 
         # collecting lyrics take approximately 30 times as long as it takes to collect the songs
         lyric_approx_time = datetime.timedelta(seconds=int(song_time_taken*30))
-        print(f'Collection Lyrics will take approx {lyric_approx_time}')
+        print(f'Collecting Lyrics will take approx {lyric_approx_time}')
         lyric_start_time = time.time()
+        # run the function to find the lyrics
         print('Collecting lyrics...\n')
         api_methods.find_lyrics_for_songs(artist_obj)
         lyric_end_time = time.time()
-
+        # calculate the final time taken for lyrics
         lyric_time_taken = round((lyric_end_time-lyric_start_time), 2)
         return lyric_time_taken + song_time_taken
 
