@@ -6,7 +6,7 @@ import lorem
 import io
 import sys
 import api_methods
-from test import testing_methods
+from test import testing_functions
 import artist
 import song
 
@@ -73,7 +73,7 @@ class APIMethodsTests(TestCase):
         """
         # set up the correct url that will be used in the get request
         params = {"q": "Jack White"}
-        full_url = testing_methods.construct_url(url="https://genius.p.rapidapi.com/search",
+        full_url = testing_functions.construct_url(url="https://genius.p.rapidapi.com/search",
                                                  params=params)
         # set up the http response body in the correct format
         body = json.dumps({"response": {"hits": [{
@@ -100,7 +100,7 @@ class APIMethodsTests(TestCase):
         # set up the correct url that will be used in the mock get request,
         # with an obvious non-artist
         params = {"q": "Hamish Child"}
-        full_url = testing_methods.construct_url(url="https://genius.p.rapidapi.com/search",
+        full_url = testing_functions.construct_url(url="https://genius.p.rapidapi.com/search",
                                                  params=params)
         # set up the http response body in the correct format, with no response
         body = json.dumps({"response": {"hits": []}})
@@ -124,7 +124,7 @@ class APIMethodsTests(TestCase):
         # set up the correct url that will be used in the get request
         params = {"page": 1,
                   "per_page": "50"}
-        full_url = testing_methods.construct_url(
+        full_url = testing_functions.construct_url(
             url="https://genius.p.rapidapi.com/artists/123456/songs?",
             params=params)
         # set up the http response body in the correct format and next_page set to Nan

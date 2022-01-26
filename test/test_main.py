@@ -7,7 +7,7 @@ import io
 import sys
 import httpretty
 import json
-from test import testing_methods
+from test import testing_functions
 import artist
 import time
 
@@ -59,7 +59,7 @@ class MainTests(TestCase):
         sys.stdout = captured_output
         # set up the correct url that will be used in the get request, to prevent the get request from sending
         params = {"q": "Kasabian"}
-        full_url = testing_methods.construct_url(url="https://genius.p.rapidapi.com/search",
+        full_url = testing_functions.construct_url(url="https://genius.p.rapidapi.com/search",
                                                  params=params)
         # set up the http response body in the correct format
         body = json.dumps({"response": {"hits": [{
@@ -84,7 +84,7 @@ class MainTests(TestCase):
         sys.stdout = captured_output
         # set up the correct url that will be used in the get request, to prevent the get request from sending
         params = {"q": "Kasabian"}
-        full_url = testing_methods.construct_url(url="https://genius.p.rapidapi.com/search",
+        full_url = testing_functions.construct_url(url="https://genius.p.rapidapi.com/search",
                                                  params=params)
         # set up the http response body in the correct format
         body = json.dumps({"response": {"hits": [{
@@ -112,7 +112,7 @@ class MainTests(TestCase):
         sys.stdout = captured_output
         # set up the correct url that will be used in the get request, to prevent the get request from sending
         params = {"q": "Kasabian"}
-        full_url = testing_methods.construct_url(url="https://genius.p.rapidapi.com/search",
+        full_url = testing_functions.construct_url(url="https://genius.p.rapidapi.com/search",
                                                  params=params)
         # set up the http response body in the correct format
         body = json.dumps({"response": {"hits": [{
@@ -138,7 +138,7 @@ class MainTests(TestCase):
         # register the urls that will be used in the get request, to prevent the get request from sending
         # first register the url for finding the artists songs
         songs_params = {"page": 1, "per_page": "50"}
-        songs_full_url = testing_methods.construct_url(
+        songs_full_url = testing_functions.construct_url(
             url="https://genius.p.rapidapi.com/artists/123456/songs?", params=songs_params)
         # set up the http response body in the correct format and next_page set to Nan
         songs_body = json.dumps(
@@ -174,7 +174,7 @@ class MainTests(TestCase):
         # register the urls that will be used in the get request, to prevent the get request from sending
         # set up the url for the artist selection API
         params = {"q": "David Bowie"}
-        full_url = testing_methods.construct_url(url="https://genius.p.rapidapi.com/search",
+        full_url = testing_functions.construct_url(url="https://genius.p.rapidapi.com/search",
                                                  params=params)
         # set up the http response body in the correct format
         body = json.dumps({"response": {"hits": [{
@@ -183,7 +183,7 @@ class MainTests(TestCase):
         httpretty.register_uri(httpretty.GET, full_url, body=body)
         # register the url for finding the artists songs
         songs_params = {"page": 1, "per_page": "50"}
-        songs_full_url = testing_methods.construct_url(
+        songs_full_url = testing_functions.construct_url(
             url="https://genius.p.rapidapi.com/artists/123456/songs?", params=songs_params)
         # set up the http response body in the correct format and next_page set to Nan
         songs_body = json.dumps(
@@ -220,7 +220,7 @@ class MainTests(TestCase):
         # register the urls that will be used in the get request, to prevent the get request from sending
         # set up the url for the artist selection API
         params = {"q": "David Bowie"}
-        full_url = testing_methods.construct_url(url="https://genius.p.rapidapi.com/search",
+        full_url = testing_functions.construct_url(url="https://genius.p.rapidapi.com/search",
                                                  params=params)
         # set up the http response body in the correct format
         body = json.dumps({"response": {"hits": [{
@@ -229,7 +229,7 @@ class MainTests(TestCase):
         httpretty.register_uri(httpretty.GET, full_url, body=body)
         # register the url for finding the artists songs
         songs_params = {"page": 1, "per_page": "50"}
-        songs_full_url = testing_methods.construct_url(
+        songs_full_url = testing_functions.construct_url(
             url="https://genius.p.rapidapi.com/artists/123456/songs?", params=songs_params)
         # set up the http response body in the correct format and next_page set to Nan
         songs_body = json.dumps(
