@@ -117,7 +117,7 @@ class MainTests(TestCase):
         # set up the correct url that will be used in the get request, to prevent the get request from sending
         params = {"q": "Kasabian"}
         full_url = testing_functions.construct_url(url="https://genius.p.rapidapi.com/search",
-                                                 params=params)
+                                                   params=params)
         # set up the http response body in the correct format
         body = json.dumps({"response": {"hits": [{
             "result": {"primary_artist": {"name": "Kasabian", "id": 123456}}}]}})
@@ -142,7 +142,7 @@ class MainTests(TestCase):
         # set up the correct url that will be used in the get request, to prevent the get request from sending
         params = {"q": "Kasabian"}
         full_url = testing_functions.construct_url(url="https://genius.p.rapidapi.com/search",
-                                                 params=params)
+                                                   params=params)
         # set up the http response body in the correct format
         body = json.dumps({"response": {"hits": [{
             "result": {"primary_artist": {"name": "Kasabian", "id": 123456}}}]}})
@@ -170,7 +170,7 @@ class MainTests(TestCase):
         # set up the correct url that will be used in the get request, to prevent the get request from sending
         params = {"q": "Kasabian"}
         full_url = testing_functions.construct_url(url="https://genius.p.rapidapi.com/search",
-                                                 params=params)
+                                                   params=params)
         # set up the http response body in the correct format
         body = json.dumps({"response": {"hits": [{
             "result": {"primary_artist": {"name": "Kasabian", "id": 123456}}}]}})
@@ -234,7 +234,7 @@ class MainTests(TestCase):
         # set up the url for the artist selection API
         params = {"q": "David Bowie"}
         full_url = testing_functions.construct_url(url="https://genius.p.rapidapi.com/search",
-                                                 params=params)
+                                                   params=params)
         # set up the http response body in the correct format
         body = json.dumps({"response": {"hits": [{
             "result": {"primary_artist": {"name": "David Bowie", "id": 123456}}}]}})
@@ -283,7 +283,7 @@ class MainTests(TestCase):
         # set up the url for the artist selection API
         params = {"q": "David Bowie"}
         full_url = testing_functions.construct_url(url="https://genius.p.rapidapi.com/search",
-                                                 params=params)
+                                                   params=params)
         # set up the http response body in the correct format
         body = json.dumps({"response": {"hits": [{
             "result": {"primary_artist": {"name": "David Bowie", "id": 123456}}}]}})
@@ -336,7 +336,7 @@ class MainTests(TestCase):
         # set up the url for the artist selection API
         params = {"q": "David Bowie"}
         full_url = testing_functions.construct_url(url="https://genius.p.rapidapi.com/search",
-                                                 params=params)
+                                                   params=params)
         # set up the http response body in the correct format
         body = json.dumps({"response": {"hits": [{
             "result": {"primary_artist": {"name": "David Bowie", "id": 123456}}}]}})
