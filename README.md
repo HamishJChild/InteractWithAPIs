@@ -14,7 +14,7 @@ The goal of this app is to take the input of an artist by a user and produce the
     - This will show the test coverage against all the statements in the codebase.
 
 ## Structure
-- This app makes three sets of API calls, the first two to Genius to search for the artist and then find the lists of songs for that artist and the third API call to lyrics.ovh to get the lyrics for that song. The data taken in as a dict and parsed from there.
+- This app makes three sets of API calls, the first two to [Genius](https://rapidapi.com/brianiswu/api/genius/) through RapidAPI to search for the artist and then find the lists of songs for that artist and the third API call to [lyrics.ovh](https://lyricsovh.docs.apiary.io/#reference/0/lyrics-of-a-song/search) to get the lyrics for that song. The data taken in as a dict and parsed from there.
 - User Interface
   - I decided the keep the user interface relatively simple, with the use of some colours to highlight important text. The app is designed to be used without re-running any commands, until the user has finished. This means the user can continuously search for artists unitl they have satisfied their need.
 - Artist Selection
