@@ -37,7 +37,7 @@ class Main:
         :return: None
         """
         sleep(0.5)
-        print('Would you like to enter another Artists name?')
+        print('Would you like to enter another Artists name (Y/N)?')
         while True:
             another_artist_bool = input()
             if another_artist_bool not in ['Y', 'N', 'y', 'n']:
@@ -99,9 +99,8 @@ class Main:
                       color='green', attrs=['bold', 'reverse']))
         song_end_time = time.time()
         song_time_taken = round((song_end_time - song_start_time), 2)
-
-        # collecting lyrics take approximately 30 times as long as it takes to collect the songs
-        lyric_approx_time = datetime.timedelta(seconds=int(song_time_taken*30))
+        # collecting lyrics take approximately 1.5 times as long as it takes to collect the songs
+        lyric_approx_time = datetime.timedelta(seconds=int(song_time_taken * 1.5))
         print(f'Collecting Lyrics will take approx {lyric_approx_time}')
         lyric_start_time = time.time()
         # run the function to find the lyrics

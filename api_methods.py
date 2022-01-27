@@ -1,8 +1,10 @@
+from concurrent.futures import ThreadPoolExecutor, as_completed
 import requests
 import artist
+import song
 
 
-def make_request(url: str, params=None, headers=None):
+def make_request(url: str, params=None, headers=None) -> requests.request or None:
     """
     Function to make a request to an API using the base URL and other params/headers.
     Returns a response if no HTTPError is returned, otherwise it passes the iteration.
@@ -62,6 +64,7 @@ def find_artist_songs_genius(artist_obj: artist.Artist) -> None:
     while type(page_number) == int:
         # get the songs from the artist ID
         url = f"https://genius.p.rapidapi.com/artists/{artist_obj.genius_id}/songs?"
+        # set the params, with number of results per_page set to 50. This is the largest it can be set.
         querystring = {"page": page_number,
                        "per_page": "50"}
         headers = {
@@ -76,22 +79,35 @@ def find_artist_songs_genius(artist_obj: artist.Artist) -> None:
         page_number = genius_songs_response.json()['response']['next_page']
 
 
-def find_lyrics_for_songs(artist_obj: artist.Artist) -> None:
-    """A function to find the lyrics for the each song in the list
-     using the lyrics.ovh API
+def make_lyrics_request(url: str, song_obj: song.Song) -> None:
+    """
+    This function calls the make_request function to make the api call for the songs to find its lyrics
+    and then assigns those lyrics to the song.
+    :param url: the base URL as a str
+    :param song_obj: the song object the lyrics are being found for
+    :return: None
+    """
+    lyrics_response = make_request(url)
+    if lyrics_response:
+        lyrics = lyrics_response.json()['lyrics']
+        # now assign the lyrics to the song_obj
+        song_obj.assign_lyrics_and_wordcount(lyrics)
 
-     :param artist_obj : an Artist object
-     :returns avg_word_count: an integer representing the average lyrics word count
-     for the artists_songs list"""
+
+def find_lyrics_for_songs(artist_obj: artist.Artist) -> None:
+    """
+    This function loops over the songs for an artist, and then runs multiple API calls at once,
+    using the ThreadPoolExecutor function. This allows calls to be made concurrently, speeding up the function
+    :param artist_obj : an Artist object
+    :returns avg_word_count: an integer representing the average lyrics word count
+    for the artists_songs list"""
 
     # Loop over the songs in the songs attr for an artist
-    for song_obj in artist_obj.songs:
-        # Get the lyrics for the song on the lyrics.ovh API
-        url = f"https://api.lyrics.ovh/v1/{artist_obj.full_name}/{song_obj.title}"
-        lyrics_response = make_request(url)
-        if lyrics_response:
-            lyrics = lyrics_response.json()['lyrics']
-            # now assign the lyrics to the song_obj
-            song_obj.assign_lyrics_and_wordcount(lyrics)
+    threads = []
+    with ThreadPoolExecutor(max_workers=20) as executor:
+        for song_obj in artist_obj.songs:
+            # Get the lyrics for the song on the lyrics.ovh API
+            url = f"https://api.lyrics.ovh/v1/{artist_obj.full_name}/{song_obj.title}"
+            threads.append(executor.submit(make_lyrics_request, url, song_obj))
     # now cal and assign the artist mean wordcount
     artist_obj.calc_mean_wordcount()
