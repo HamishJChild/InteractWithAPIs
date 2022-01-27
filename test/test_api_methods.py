@@ -74,7 +74,7 @@ class APIMethodsTests(TestCase):
         # set up the correct url that will be used in the get request
         params = {"q": "Jack White"}
         full_url = testing_functions.construct_url(url="https://genius.p.rapidapi.com/search",
-                                                 params=params)
+                                                   params=params)
         # set up the http response body in the correct format
         body = json.dumps({"response": {"hits": [{
             "result": {"primary_artist": {"name": "Jack White", "id": 123456}}}]}})
@@ -101,14 +101,13 @@ class APIMethodsTests(TestCase):
         # with an obvious non-artist
         params = {"q": "Hamish Child"}
         full_url = testing_functions.construct_url(url="https://genius.p.rapidapi.com/search",
-                                                 params=params)
+                                                   params=params)
         # set up the http response body in the correct format, with no response
         body = json.dumps({"response": {"hits": []}})
         # Set up the httpretty http client mock with the correct url and body
         httpretty.register_uri(httpretty.GET, full_url, body=body)
-        # assert that a SystemExit is raised
-        with self.assertRaises(SystemExit) as cm:
-            api_methods.find_artist_genius('Hamish Child')
+        # run the function
+        api_methods.find_artist_genius('Hamish Child')
         # reset redirect
         sys.stdout = sys.__stdout__
         # assert the printed text is as expected

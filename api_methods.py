@@ -20,7 +20,7 @@ def make_request(url: str, params=None, headers=None):
         pass
 
 
-def find_artist_genius(entered_name: str) -> artist.Artist:
+def find_artist_genius(entered_name: str) -> artist.Artist or None:
     """A function to use an API call to Genius find the artist from the search entry.
     :param entered_name: a string entered by the user in the cli input.
     :returns artist_obj: an Artist object with the full_name and genius_id variables set."""
@@ -45,7 +45,7 @@ def find_artist_genius(entered_name: str) -> artist.Artist:
         return artist_obj
     except IndexError:
         print('This artist does not exist in the Genius database')
-        raise SystemExit()
+        return None
 
 
 def find_artist_songs_genius(artist_obj: artist.Artist) -> None:
