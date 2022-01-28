@@ -12,7 +12,7 @@ assign_lyrics_and_wordcount
 
 class Song:
     """
-    A class to represent an song.
+    A class to represent a song and its attributes.
 
     ...
 
@@ -29,6 +29,7 @@ class Song:
 
     Methods
     -------
+    assign_lyrics_and_wordcount
 
     """
 
@@ -40,6 +41,12 @@ class Song:
         ----------
             title : str
                 the title of the song
+            lyrics_found : bool
+                whether the lyrics for the song were found with a lyricsovh api call
+            lyrics : str
+                the lyrics for the song.
+            word_count : int
+                the word count for the lyrics
         """
 
         self.title = title

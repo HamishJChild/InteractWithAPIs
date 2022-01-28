@@ -1,4 +1,4 @@
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import ThreadPoolExecutor
 import requests
 import artist
 import song
@@ -11,11 +11,10 @@ def make_request(url: str, params=None, headers=None) -> requests.request or Non
     :param url: the base URL as a str
     :param params: a dict with the queries for the API call
     :param headers: a dict of the headers for the API call
-    :return: response
+    :return: response or None
     """
     try:
         response = requests.request("GET", url, headers=headers, params=params)
-        # print("Make Request Response", response, response.json())
         response.raise_for_status()
         return response
     except requests.exceptions.HTTPError:
@@ -25,7 +24,9 @@ def make_request(url: str, params=None, headers=None) -> requests.request or Non
 def find_artist_genius(entered_name: str) -> artist.Artist or None:
     """A function to use an API call to Genius find the artist from the search entry.
     :param entered_name: a string entered by the user in the cli input.
-    :returns artist_obj: an Artist object with the full_name and genius_id variables set."""
+    :returns artist_obj: an Artist object with the full_name and genius_id variables set.
+    or
+    :returns None"""
 
     # first search for the artist on Genius API
     base_url = "https://genius.p.rapidapi.com/search"
@@ -97,7 +98,7 @@ def make_lyrics_request(url: str, song_obj: song.Song) -> None:
 def find_lyrics_for_songs(artist_obj: artist.Artist) -> None:
     """
     This function loops over the songs for an artist, and then runs multiple API calls at once,
-    using the ThreadPoolExecutor function. This allows calls to be made concurrently, speeding up the function
+    using the ThreadPoolExecutor function. This allows calls to be made concurrently, speeding up the function.
     :param artist_obj : an Artist object
     :returns avg_word_count: an integer representing the average lyrics word count
     for the artists_songs list"""

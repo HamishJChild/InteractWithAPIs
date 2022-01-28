@@ -41,7 +41,7 @@ class Artist(object):
 
     """
 
-    def __init__(self, genius_id, full_name) -> None:
+    def __init__(self, genius_id, full_name, songs=None, mean_wordcount=0) -> None:
         """
         Constructs all the necessary attributes for the artist object.
 
@@ -51,6 +51,10 @@ class Artist(object):
                 the Genius ID of the artist
             full_name : str
                 full name of the artist
+            songs : list
+                a list of the Song objects an artist is the primary artist for.
+            mean_wordcount : int
+                the mean wordcount from all the songs for this artist
         """
 
         self.genius_id = genius_id

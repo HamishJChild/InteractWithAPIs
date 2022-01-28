@@ -1,7 +1,6 @@
 import json
 from unittest import TestCase
 import httpretty
-import requests
 import lorem
 import io
 import sys
@@ -147,13 +146,13 @@ class APIMethodsTests(TestCase):
     def test_find_lyrics_for_songs_songs_and_lyrics(self):
         """
         Test that this function finds the lyrics for the songs for an artist,
-         then calculates the avg wordcount for those lyrics.
-         This is for an artist with songs and those songs have lyrics.
+        then calculates the avg wordcount for those lyrics.
+        This is for an artist with songs and those songs have lyrics.
         """
         # capture the console output to prevent it from printing
         captured_output = io.StringIO()  # Create StringIO object
         sys.stdout = captured_output
-        # reqister the 3 url's that will be used in the API calls
+        # register the 3 url's that will be used in the API calls
         i = 0
         for song_obj in self.artist2.songs:
             # set up the correct url that will be used in the get request

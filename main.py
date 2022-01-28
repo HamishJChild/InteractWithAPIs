@@ -1,5 +1,4 @@
 import sys
-
 import api_methods
 import time
 import datetime
@@ -13,6 +12,23 @@ init()
 
 
 class Main:
+    """
+    A class to pull together all the satellite functions into one run method.
+
+    ...
+
+    Attributes
+    ----------
+    entered_name : the name inputted by the user.
+
+    Methods
+    -------
+    initial_input
+    another_artist_input
+    artist_selection
+    get_songs_and_lyrics
+    run
+    """
     def __init__(self):
         self.entered_name = None
 

@@ -16,7 +16,7 @@ class MainTests(TestCase):
     """
     A set of test for the Main class and its methods.
     These can mainly be seen an integration tests, as they test functionality that is already covered
-    by other tests, but they test that functionality working concurrently.
+    by other tests, but they test that functionality works together.
     """
 
     def setUp(self) -> None:
@@ -115,12 +115,12 @@ class MainTests(TestCase):
         captured_output = io.StringIO()  # Create StringIO object
         sys.stdout = captured_output
         # set up the correct url that will be used in the get request, to prevent the get request from sending
-        params = {"q": "Kasabian"}
+        params = {"q": self.user_input}
         full_url = testing_functions.construct_url(url="https://genius.p.rapidapi.com/search",
                                                    params=params)
         # set up the http response body in the correct format
         body = json.dumps({"response": {"hits": [{
-            "result": {"primary_artist": {"name": "Kasabian", "id": 123456}}}]}})
+            "result": {"primary_artist": {"name": self.user_input, "id": 123456}}}]}})
         # Set up the httpretty http client mock with the correct url and body
         httpretty.register_uri(httpretty.GET, full_url, body=body)
         # use mock input of y
@@ -140,12 +140,12 @@ class MainTests(TestCase):
         captured_output = io.StringIO()  # Create StringIO object
         sys.stdout = captured_output
         # set up the correct url that will be used in the get request, to prevent the get request from sending
-        params = {"q": "Kasabian"}
+        params = {"q": self.user_input}
         full_url = testing_functions.construct_url(url="https://genius.p.rapidapi.com/search",
                                                    params=params)
         # set up the http response body in the correct format
         body = json.dumps({"response": {"hits": [{
-            "result": {"primary_artist": {"name": "Kasabian", "id": 123456}}}]}})
+            "result": {"primary_artist": {"name": self.user_input, "id": 123456}}}]}})
         # Set up the httpretty http client mock with the correct url and body
         httpretty.register_uri(httpretty.GET, full_url, body=body)
         # use mock input of N
@@ -161,19 +161,20 @@ class MainTests(TestCase):
     def test_artist_selection_incorrect_input(self, mock):
         """
         Test that the function will prompt the user to continue to input an answer if they don't input (Y, N, y, n).
-        The mock patch decorator runs through two user inputs, one that will cause the user to input again
-        and the next which will be correct and cause an artist.Artist object to be returned.
+        The mock patch decorator runs through two user inputs, one that is invalid and
+        will cause the user to input again and the next which will be correct and
+        cause an artist.Artist object to be returned.
         """
         # capture the console output to prevent it from printing
         captured_output = io.StringIO()  # Create StringIO object
         sys.stdout = captured_output
         # set up the correct url that will be used in the get request, to prevent the get request from sending
-        params = {"q": "Kasabian"}
+        params = {"q": self.user_input}
         full_url = testing_functions.construct_url(url="https://genius.p.rapidapi.com/search",
                                                    params=params)
         # set up the http response body in the correct format
         body = json.dumps({"response": {"hits": [{
-            "result": {"primary_artist": {"name": "Kasabian", "id": 123456}}}]}})
+            "result": {"primary_artist": {"name": self.user_input, "id": 123456}}}]}})
         # Set up the httpretty http client mock with the correct url and body
         httpretty.register_uri(httpretty.GET, full_url, body=body)
         artist_obj = self.main_class.artist_selection()
@@ -187,7 +188,7 @@ class MainTests(TestCase):
     @httpretty.activate
     def test_get_songs_and_lyrics_time(self):
         """
-        Test that the method returns a time taken for the function to run.
+        Test that the get_songs_and_lyrics method returns a time taken for the function to run.
         """
         # capture the console output to prevent it from printing
         captured_output = io.StringIO()  # Create StringIO object

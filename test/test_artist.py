@@ -73,7 +73,6 @@ class ArtistTests(TestCase):
         # capture the console output to prevent it from printing
         captured_output = io.StringIO()  # Create StringIO object
         sys.stdout = captured_output
-        word_count_list = []
         # First assign the songs to the artist attr Songs
         self.new_artist.assign_songs(self.songs_no_lyrics)
         # now run function to calc mean wordcount - this should do nothing as there are no lyrics
