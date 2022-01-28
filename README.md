@@ -18,7 +18,7 @@ The goal of this app is to take the input of an artist by a user and produce the
 - User Interface
   - I decided the keep the user interface relatively simple, with the use of some colours to highlight important text. The app is designed to be used without re-running any commands until the user has finished. This means the user can continuously search for artists unitl they have satisfied their need.
 - Artist Selection
-  - The user is first prompted to enter the name of an artist, which will then be used in a search in the Genius Database.
+  - The user is first prompted to enter the name of an artist, which will then be used in a search in the Genius Database. The user can also enter one of the artists songs and the artist will be returned still.
   - If an Artist name is found, the user is asked if this is the correct artist. If 'yes', the app moves to the next step. If 'no', the user is prompted to enter the name again.
   - If no artist is found in the search, the user is prompted to enter the name again.
 - Song Query
@@ -36,6 +36,7 @@ The goal of this app is to take the input of an artist by a user and produce the
 
 ## Next time...
 - I made the decision early on to build an app that would be quick and easy to use, and meet the brief in its entirety. However, next time I would look to extend the features of this app and build the front end out of the command line and into a web app.
+- The first change I would make would be to return the top 5 or 10 results found when search for the artist, rather than just the top. This is because sometimes the artist searched doesn't appear at the top of the search results.
     - I would do this by drawing on my experince with Django to create a web app with a structured database and responsive design that allows the user to search and select the artist from a drop down in a form.
     - The app would run the core functionality to return the average word count, but allow the user to also compare against other artists, see the artists longest and shortest songs, and view the artist on their streaming app of choice.
 - I would also look to improve my use of API, as the Genius song search is clunky due a max of 50 results being returned at a time. If I knew beforehand how many results there were, I could set up multi-threading for the pages to make the API calls concurrently, which would speed it up also.
