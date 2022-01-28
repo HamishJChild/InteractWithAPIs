@@ -36,7 +36,7 @@ The goal of this app is to take the input of an artist by a user and produce the
 
 ## Next time...
 - I made the decision early on to build an app that would be quick and easy to use, and meet the brief in its entirety. However, next time I would look to extend the features of this app and build the front end out of the command line and into a web app.
-- The first change I would make would be to return the top 5 or 10 results found when search for the artist, rather than just the top. This is because sometimes the artist searched doesn't appear at the top of the search results.
     - I would do this by drawing on my experince with Django to create a web app with a structured database and responsive design that allows the user to search and select the artist from a drop down in a form.
     - The app would run the core functionality to return the average word count, but allow the user to also compare against other artists, see the artists longest and shortest songs, and view the artist on their streaming app of choice.
+- I would also add in the functionality to return the top 5 or 10 results found when search for the artist, rather than just the top result. This is because sometimes the artist searched doesn't appear at the top of the search results.
 - I would also look to improve my use of API, as the Genius song search is clunky due a max of 50 results being returned at a time. If I knew beforehand how many results there were, I could set up multi-threading for the pages to make the API calls concurrently, which would speed it up also.
