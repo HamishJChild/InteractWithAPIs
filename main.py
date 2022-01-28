@@ -41,7 +41,8 @@ class Main:
         # get terminal size
         cols, rows = shutil.get_terminal_size()
         opening_text = colored(text='Artist Word Count CLI by Hamish Child', color='blue', attrs=['bold', 'reverse'])
-
+        # add a new line and then the opening text
+        print('\n')
         print(opening_text.center(cols+15))
         # take the input from the user
         print(u'Hi and welcome to the Artist Avg Word Count CLI!'.center(cols))
