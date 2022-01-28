@@ -1,3 +1,4 @@
+import shutil
 import sys
 import api_methods
 import time
@@ -37,13 +38,14 @@ class Main:
         A function to set up the initial display and take the entered name from input.
         :return: None
         """
-        print(colored(text='Artist Word Count CLI by Hamish Child\n', color='blue', attrs=['bold', 'reverse']))
-        sleep(0.5)
+        # get terminal size
+        cols, rows = shutil.get_terminal_size()
+        opening_text = colored(text='Artist Word Count CLI by Hamish Child', color='blue', attrs=['bold', 'reverse'])
+
+        print(opening_text.center(cols+15))
         # take the input from the user
-        print(u'Hi and welcome to the Artist Avg Word Count CLI!\n'
-              u'\n'
-              u'Find the average word count for any artist with ease.\n')
-        sleep(0.5)
+        print(u'Hi and welcome to the Artist Avg Word Count CLI!'.center(cols))
+        print(u'Find the average word count for any artist with ease.\n'.center(cols))
         print('Please enter an Artist name:')
         self.entered_name = input()
 

@@ -35,7 +35,7 @@ def find_artist_genius(entered_name: str) -> artist.Artist or None:
 
     headers = {
         'x-rapidapi-host': "genius.p.rapidapi.com",
-        'x-rapidapi-key': "54c85d06f1mshceda12a2e078e4ep140148jsnb34cacfb54cb"
+        'x-rapidapi-key': "d7ad286703msh16c7e9d16008c8dp1f165djsn0673935389b2"
         }
 
     response = make_request(base_url, params=params, headers=headers)
@@ -70,7 +70,7 @@ def find_artist_songs_genius(artist_obj: artist.Artist) -> None:
                        "per_page": "50"}
         headers = {
             'x-rapidapi-host': "genius.p.rapidapi.com",
-            'x-rapidapi-key': "54c85d06f1mshceda12a2e078e4ep140148jsnb34cacfb54cb"
+            'x-rapidapi-key': "d7ad286703msh16c7e9d16008c8dp1f165djsn0673935389b2"
             }
 
         genius_songs_response = make_request(url, headers=headers, params=querystring)
