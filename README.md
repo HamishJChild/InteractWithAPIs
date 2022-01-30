@@ -24,7 +24,7 @@ The goal of this app is to take the input of an artist by a user and produce the
 - Song Query
   - Assuming an artist is found in the previous step, an API call to Genius is made to find the songs for that artist. The user is told how many songs have been found.
 - Lyrics Query
-  - The app then loops over the songs for the artist, and makes an API call for each song to get the lyrics. The user is given an estimate for how long this may take (based on an estimation of the lyrics taking 1.5 times as long as the songs take, on average).
+  - The app then loops over the songs for the artist, and makes an API call for each song to get the lyrics. The user is given an estimate for how long this may take (based on an estimation of the API call for the lyrics taking 1.5 times as long as the API call for the song takes, on average).
   - If lyrics are found, they are assigned to the song with the wordcount for the lyrics. The mean wordcount for the artist is then found, across all the songs.
   - The final wordcount is presented to the user, alongside how long the process took.
   - If no lyrics are found then the user is informed and prompted to enter another artist's name.
